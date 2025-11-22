@@ -1,48 +1,43 @@
 """
-Database Schemas
+Database Schemas for Citizen Hub
 
-Define your MongoDB collection schemas here using Pydantic models.
-These schemas are used for data validation in your application.
-
-Each Pydantic model represents a collection in your database.
-Model name is converted to lowercase for the collection name:
-- User -> "user" collection
-- Product -> "product" collection
-- BlogPost -> "blogs" collection
+Each Pydantic model represents a collection (lowercased class name).
 """
-
-from pydantic import BaseModel, Field
-from typing import Optional
-
-# Example schemas (replace with your own):
+from pydantic import BaseModel, Field, EmailStr
+from typing import Optional, Literal, List
+from datetime import datetime
 
 class User(BaseModel):
-    """
-    Users collection schema
-    Collection name: "user" (lowercase of class name)
-    """
     name: str = Field(..., description="Full name")
-    email: str = Field(..., description="Email address")
-    address: str = Field(..., description="Address")
-    age: Optional[int] = Field(None, ge=0, le=120, description="Age in years")
-    is_active: bool = Field(True, description="Whether user is active")
+    email: EmailStr = Field(..., description="Email address")
+    preferred_language: Literal["en", "hi"] = Field("en", description="User's preferred language")
+    is_active: bool = Field(True, description="Active user")
 
-class Product(BaseModel):
-    """
-    Products collection schema
-    Collection name: "product" (lowercase of class name)
-    """
-    title: str = Field(..., description="Product title")
-    description: Optional[str] = Field(None, description="Product description")
-    price: float = Field(..., ge=0, description="Price in dollars")
-    category: str = Field(..., description="Product category")
-    in_stock: bool = Field(True, description="Whether product is in stock")
+class Session(BaseModel):
+    user_email: EmailStr = Field(...)
+    token: str = Field(..., description="Session token (opaque)")
+    expires_at: datetime = Field(..., description="Expiry timestamp (UTC)")
 
-# Add your own schemas here:
-# --------------------------------------------------
+class Application(BaseModel):
+    user_email: EmailStr
+    doc_type: Literal["aadhaar", "pan", "dl", "voter", "passport"]
+    status: Literal["draft", "submitted", "in_review", "approved", "rejected"] = "draft"
+    reference_id: Optional[str] = None
+    metadata: dict = Field(default_factory=dict)
 
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+class Payment(BaseModel):
+    user_email: EmailStr
+    purpose: str
+    amount: float = Field(..., ge=0)
+    currency: Literal["INR"] = "INR"
+    status: Literal["initiated", "successful", "failed", "refunded"] = "initiated"
+    application_ref: Optional[str] = None
+    provider_ref: Optional[str] = None
+
+# Search index document for predictive search suggestions
+class SearchItem(BaseModel):
+    key: str
+    label: str
+    category: str
+    url: str
+    keywords: List[str] = Field(default_factory=list)

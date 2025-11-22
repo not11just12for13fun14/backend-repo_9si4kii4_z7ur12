@@ -1,0 +1,27 @@
+INFO:     Will watch for changes in these directories: ['/home/workspace']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [152] using StatReload
+INFO:     Started server process [154]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     172.20.0.1:44530 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+INFO:     172.20.0.1:45406 - "GET /guides/dl HTTP/1.1" 200 OK
+INFO:     172.20.0.1:45444 - "GET /guides/voter HTTP/1.1" 200 OK
+INFO:     172.20.0.1:45418 - "GET /guides/aadhaar HTTP/1.1" 200 OK
+INFO:     172.20.0.1:45454 - "GET /guides/pan HTTP/1.1" 200 OK
+INFO:     172.20.0.1:45434 - "GET /guides/passport HTTP/1.1" 200 OK
+INFO:     172.20.0.1:45406 - "GET /guides/dl HTTP/1.1" 200 OK
+INFO:     172.20.0.1:45418 - "GET /guides/passport HTTP/1.1" 200 OK
+INFO:     172.20.0.1:45454 - "GET /guides/pan HTTP/1.1" 200 OK
+INFO:     172.20.0.1:45434 - "GET /guides/voter HTTP/1.1" 200 OK
+INFO:     172.20.0.1:45444 - "GET /guides/aadhaar HTTP/1.1" 200 OK
+INFO:     172.20.0.1:45468 - "GET /guides/aadhaar HTTP/1.1" 200 OK
+INFO:     172.20.0.1:45468 - "GET /guides/pan HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34282 - "GET /guides/dl HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34284 - "GET /guides/voter HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34300 - "GET /guides/passport HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34314 - "GET /guides/aadhaar HTTP/1.1" 200 OK
+INFO:     172.20.0.1:45468 - "GET /guides/pan HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34300 - "GET /guides/dl HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34282 - "GET /guides/passport HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34284 - "GET /guides/voter HTTP/1.1" 200 OK
